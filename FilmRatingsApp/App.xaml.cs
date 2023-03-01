@@ -1,4 +1,5 @@
-﻿using FilmRatingsApp.Activation;
+﻿using CommunityToolkit.Mvvm.DependencyInjection;
+using FilmRatingsApp.Activation;
 using FilmRatingsApp.Contracts.Services;
 using FilmRatingsApp.Core.Contracts.Services;
 using FilmRatingsApp.Core.Services;
@@ -11,6 +12,7 @@ using FilmRatingsApp.Views;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
 
 namespace FilmRatingsApp;
 
@@ -80,6 +82,11 @@ public partial class App : Application
             services.AddTransient<ShellPage>();
             services.AddTransient<ShellViewModel>();
 
+            Ioc.Default.ConfigureServices(
+                new ServiceCollection()
+                .AddSingleton<UtilisateurViewModel>()
+                .BuildServiceProvider());
+
             // Configuration
             services.Configure<LocalSettingsOptions>(context.Configuration.GetSection(nameof(LocalSettingsOptions)));
         }).
@@ -99,5 +106,27 @@ public partial class App : Application
         base.OnLaunched(args);
 
         await App.GetService<IActivationService>().ActivateAsync(args);
+        m_window = new MainWindow();
+        // Create a Frame to act as the navigation context and navigate to the first page
+        Frame rootFrame = new Frame();
+        // Place the frame in the current Window
+        this.m_window.Content = rootFrame;
+        // Ensure the current window is active
+        //Navigate to the first page
+        //rootFrame.Navigate(typeof(AjoutSeriePage));
+        MainRoot = m_window.Content as FrameworkElement;
+    }
+    public static FrameworkElement MainRoot
+    {
+        get; private set;
+    }
+
+    private Window m_window;
+    public UtilisateurViewModel UtilisateurVM
+    {
+        get
+        {
+            return Ioc.Default.GetService<UtilisateurViewModel>();
+        }
     }
 }
