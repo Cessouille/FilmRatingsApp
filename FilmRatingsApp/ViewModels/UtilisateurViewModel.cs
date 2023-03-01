@@ -2,10 +2,11 @@
 using CommunityToolkit.Mvvm.Input;
 using FilmRatingsApp.Models;
 using FilmRatingsApp.Services;
+using Microsoft.UI.Xaml.Controls;
 
 namespace FilmRatingsApp.ViewModels;
 
-public class UtilisateurViewModel : HomeViewModel
+public class UtilisateurViewModel : ObservableObject
 {
     public IRelayCommand BtnSearchUtilisateurCommand { get; }
 
@@ -39,5 +40,18 @@ public class UtilisateurViewModel : HomeViewModel
             DisplayErreurDialog("Série non trouvée !", "Erreur");
         else
             UtilisateurSearch = result.Value;
+    }
+
+    public async void DisplayErreurDialog(string content, string title)
+    {
+        ContentDialog erreur = new ContentDialog()
+        {
+            Title = title,
+            Content = content,
+            CloseButtonText = "Ok"
+        };
+
+        /*erreur.XamlRoot = App.MainRoot.XamlRoot;
+        await erreur.ShowAsync();*/
     }
 }

@@ -1,5 +1,5 @@
 ﻿using FilmRatingsApp.ViewModels;
-using Microsoft.UI.Xaml;
+
 using Microsoft.UI.Xaml.Controls;
 
 namespace FilmRatingsApp.Views;
@@ -13,7 +13,8 @@ public sealed partial class UtilisateurPage : Page
 
     public UtilisateurPage()
     {
-        this.InitializeComponent();
-        DataContext = ((App)Application.Current).UtilisateurVM;
+        ViewModel = App.GetService<UtilisateurViewModel>();
+        DataContext = ViewModel;
+        InitializeComponent();
     }
 }
