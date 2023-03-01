@@ -77,7 +77,7 @@ public class WSService : IService
         }
     }
 
-    public async Task<ActionResult<bool>> PostUtilisateurAsync(string nomControlleur, Utilisateur utilisateur)
+    public async Task<bool> PostUtilisateurAsync(string nomControlleur, Utilisateur utilisateur)
     {
         try
         {

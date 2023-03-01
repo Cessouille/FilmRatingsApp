@@ -9,11 +9,17 @@ namespace FilmRatingsApp.ViewModels;
 public class UtilisateurViewModel : ObservableObject
 {
     public IRelayCommand BtnSearchUtilisateurCommand { get; }
+    public IRelayCommand BtnModifyUtilisateurCommand { get; }
+    public IRelayCommand BtnClearUtilisateurCommand { get; }
+    public IRelayCommand BtnAddUtilisateurCommand { get; }
 
     public UtilisateurViewModel()
     {
         UtilisateurSearch = new Utilisateur();
         BtnSearchUtilisateurCommand = new RelayCommand(SearchUserOnAction);
+        BtnModifyUtilisateurCommand = new RelayCommand(ModifyUserOnAction);
+        BtnClearUtilisateurCommand = new RelayCommand(ClearUserOnAction);
+        BtnAddUtilisateurCommand = new RelayCommand(AddUserOnAction);
     }
 
     private string searchMail;
@@ -37,12 +43,39 @@ public class UtilisateurViewModel : ObservableObject
         WSService service = new WSService("https://localhost:7275");
         var result = await service.GetUtilisateurByEmailAsync("api/Utilisateurs/GetByEmail/GetByEmail", SearchMail);
         if (result == null)
-            DisplayErreurDialog("Utilisateur non trouvé !", "Erreur");
+            DisplayDialog("Utilisateur non trouvé !", "Erreur");
         else
             UtilisateurSearch = result.Value;
     }
 
-    public async void DisplayErreurDialog(string content, string title)
+    public async void ModifyUserOnAction()
+    {
+        WSService service = new WSService("https://localhost:7275");
+        var result = await service.PutUtilisateurAsync("api/Utilisateurs/PutUtilisateur", UtilisateurSearch.UtilisateurId, UtilisateurSearch);
+        if (result == false)
+            DisplayDialog("Utilisateur non modifié !", "Erreur");
+        else
+            DisplayDialog("Utilisateur " + UtilisateurSearch.Nom + " modifié avec succès !", "Information");
+    }
+
+    public void ClearUserOnAction()
+    {
+        SearchMail = "";
+        UtilisateurSearch = new Utilisateur();
+        DisplayDialog("Champs vidés avec succès !", "Zer gut");
+    }
+
+    public async void AddUserOnAction()
+    {
+        WSService service = new WSService("https://localhost:7275");
+        var result = await service.PostUtilisateurAsync("api/Utilisateurs/PostUtilisateur", UtilisateurSearch);
+        if (result == false)
+            DisplayDialog("Utilisateur non créé !", "Erreur");
+        else
+            DisplayDialog("Utilisateur " + UtilisateurSearch.Nom + " créé avec succès !", "Information");
+    }
+
+    public async void DisplayDialog(string content, string title)
     {
         ContentDialog erreur = new ContentDialog()
         {
