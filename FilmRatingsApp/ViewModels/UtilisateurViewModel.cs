@@ -41,7 +41,7 @@ public class UtilisateurViewModel : ObservableObject
     public async void SearchUserOnAction()
     {
         WSService service = new WSService("https://localhost:7275");
-        var result = await service.GetUtilisateurByEmailAsync("api/Utilisateurs/GetByEmail/GetByEmail", SearchMail);
+        var result = await service.GetUtilisateurByEmailAsync("api/Utilisateurs/GetByEmail", SearchMail);
         if (result == null)
             DisplayDialog("Utilisateur non trouvé !", "Erreur");
         else
@@ -51,11 +51,16 @@ public class UtilisateurViewModel : ObservableObject
     public async void ModifyUserOnAction()
     {
         WSService service = new WSService("https://localhost:7275");
-        var result = await service.PutUtilisateurAsync("api/Utilisateurs/PutUtilisateur", UtilisateurSearch.UtilisateurId, UtilisateurSearch);
-        if (result == false)
-            DisplayDialog("Utilisateur non modifié !", "Erreur");
+        if (String.IsNullOrEmpty(UtilisateurSearch.Mail) || String.IsNullOrEmpty(UtilisateurSearch.Pwd))
+            DisplayDialog("Email et mot de passe obligatoire !", "Erreur");
         else
-            DisplayDialog("Utilisateur " + UtilisateurSearch.Nom + " modifié avec succès !", "Information");
+        {
+            var result = await service.PutUtilisateurAsync("api/Utilisateurs/PutUtilisateur", UtilisateurSearch.UtilisateurId, UtilisateurSearch);
+            if (result == false)
+                DisplayDialog("Utilisateur non modifié !", "Erreur");
+            else
+                DisplayDialog("Utilisateur " + UtilisateurSearch.Nom + " modifié avec succès !", "Information");
+        }
     }
 
     public void ClearUserOnAction()
@@ -67,12 +72,18 @@ public class UtilisateurViewModel : ObservableObject
 
     public async void AddUserOnAction()
     {
+
         WSService service = new WSService("https://localhost:7275");
-        var result = await service.PostUtilisateurAsync("api/Utilisateurs/PostUtilisateur", UtilisateurSearch);
-        if (result == false)
-            DisplayDialog("Utilisateur non créé !", "Erreur");
+        if (String.IsNullOrEmpty(UtilisateurSearch.Mail) || String.IsNullOrEmpty(UtilisateurSearch.Pwd))
+            DisplayDialog("Email et mot de passe obligatoire !", "Erreur");
         else
-            DisplayDialog("Utilisateur " + UtilisateurSearch.Nom + " créé avec succès !", "Information");
+        {
+            var result = await service.PostUtilisateurAsync("api/Utilisateurs/PostUtilisateur", UtilisateurSearch);
+            if (result == false)
+                DisplayDialog("Utilisateur non créé !", "Erreur");
+            else
+                DisplayDialog("Utilisateur " + UtilisateurSearch.Nom + " créé avec succès !", "Information");
+        }
     }
 
     public async void DisplayDialog(string content, string title)
