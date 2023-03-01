@@ -9,8 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FilmRatingsApp.Core", "Film
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FilmRatingsApp.Tests.MSTest", "FilmRatingsApp.Tests.MSTest\FilmRatingsApp.Tests.MSTest.csproj", "{4B6E36DE-9735-4D18-A292-231379718692}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FilmRatingsAppTests", "FilmRatingsAppTests\FilmRatingsAppTests.csproj", "{091C6A8B-B1C9-4932-B7F8-CE1AA353761C}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -79,22 +77,6 @@ Global
 		{4B6E36DE-9735-4D18-A292-231379718692}.Release|x64.Build.0 = Release|x64
 		{4B6E36DE-9735-4D18-A292-231379718692}.Release|x86.ActiveCfg = Release|x86
 		{4B6E36DE-9735-4D18-A292-231379718692}.Release|x86.Build.0 = Release|x86
-		{091C6A8B-B1C9-4932-B7F8-CE1AA353761C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{091C6A8B-B1C9-4932-B7F8-CE1AA353761C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{091C6A8B-B1C9-4932-B7F8-CE1AA353761C}.Debug|arm64.ActiveCfg = Debug|Any CPU
-		{091C6A8B-B1C9-4932-B7F8-CE1AA353761C}.Debug|arm64.Build.0 = Debug|Any CPU
-		{091C6A8B-B1C9-4932-B7F8-CE1AA353761C}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{091C6A8B-B1C9-4932-B7F8-CE1AA353761C}.Debug|x64.Build.0 = Debug|Any CPU
-		{091C6A8B-B1C9-4932-B7F8-CE1AA353761C}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{091C6A8B-B1C9-4932-B7F8-CE1AA353761C}.Debug|x86.Build.0 = Debug|Any CPU
-		{091C6A8B-B1C9-4932-B7F8-CE1AA353761C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{091C6A8B-B1C9-4932-B7F8-CE1AA353761C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{091C6A8B-B1C9-4932-B7F8-CE1AA353761C}.Release|arm64.ActiveCfg = Release|Any CPU
-		{091C6A8B-B1C9-4932-B7F8-CE1AA353761C}.Release|arm64.Build.0 = Release|Any CPU
-		{091C6A8B-B1C9-4932-B7F8-CE1AA353761C}.Release|x64.ActiveCfg = Release|Any CPU
-		{091C6A8B-B1C9-4932-B7F8-CE1AA353761C}.Release|x64.Build.0 = Release|Any CPU
-		{091C6A8B-B1C9-4932-B7F8-CE1AA353761C}.Release|x86.ActiveCfg = Release|Any CPU
-		{091C6A8B-B1C9-4932-B7F8-CE1AA353761C}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
