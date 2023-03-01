@@ -37,7 +37,7 @@ public class UtilisateurViewModel : ObservableObject
         WSService service = new WSService("https://localhost:7275");
         var result = await service.GetUtilisateurByEmailAsync("api/Utilisateurs/GetByEmail/GetByEmail", SearchMail);
         if (result == null)
-            DisplayErreurDialog("Série non trouvée !", "Erreur");
+            DisplayErreurDialog("Utilisateur non trouvé !", "Erreur");
         else
             UtilisateurSearch = result.Value;
     }
@@ -51,7 +51,7 @@ public class UtilisateurViewModel : ObservableObject
             CloseButtonText = "Ok"
         };
 
-        /*erreur.XamlRoot = App.MainRoot.XamlRoot;
-        await erreur.ShowAsync();*/
+        erreur.XamlRoot = App.MainRoot.XamlRoot;
+        await erreur.ShowAsync();
     }
 }

@@ -104,7 +104,7 @@ public partial class App : Application
     }
     public static FrameworkElement MainRoot
     {
-        get; private set;
+        get { return MainWindow.Content as FrameworkElement; }
     }
 
 }
